@@ -5,17 +5,34 @@
 //  Railway: Baca dari environment variables otomatis
 // ============================================================
 
-// ── Deteksi environment Railway vs lokal ────────────────────
+// ── Deteksi environment ──────────────────────────────────────
 $isRailway = isset($_ENV['RAILWAY_ENVIRONMENT']) || isset($_SERVER['RAILWAY_ENVIRONMENT']) || getenv('RAILWAY_ENVIRONMENT') !== false;
 
+// Deteksi apakah sedang dibuka di domain free hosting (InfinityFree / epizy / rf.gd)
+$isInfinityFree = isset($_SERVER['HTTP_HOST']) && (
+    str_contains($_SERVER['HTTP_HOST'], 'infinityfree') || 
+    str_contains($_SERVER['HTTP_HOST'], 'epizy.com') || 
+    str_contains($_SERVER['HTTP_HOST'], 'rf.gd')
+);
+
 if ($isRailway) {
+    // 1. Hosting di Railway
     define('DB_HOST',    $_ENV['MYSQLHOST']     ?? getenv('MYSQLHOST')     ?? 'localhost');
     define('DB_USER',    $_ENV['MYSQLUSER']     ?? getenv('MYSQLUSER')     ?? 'root');
     define('DB_PASS',    $_ENV['MYSQLPASSWORD'] ?? getenv('MYSQLPASSWORD') ?? '');
     define('DB_NAME',    $_ENV['MYSQLDATABASE'] ?? getenv('MYSQLDATABASE') ?? 'inventaris_sekolah');
     define('DB_PORT',    $_ENV['MYSQLPORT']     ?? getenv('MYSQLPORT')     ?? '3306');
     define('APP_URL',    $_ENV['APP_URL']       ?? getenv('APP_URL')       ?? 'https://' . ($_SERVER['HTTP_HOST'] ?? 'localhost'));
+} elseif ($isInfinityFree) {
+    // 2. Hosting di InfinityFree (Silakan GANTI 4 baris di bawah ini sesuai dashboard lu!)
+    define('DB_HOST',    'sqlXXX.infinityfree.com'); // Ganti XXX dengan nomor server database MySQL lu
+    define('DB_USER',    'if0_XXXXXXXX');           // Ganti dengan Username MySQL lu
+    define('DB_PASS',    'PasswordClientAreaLu');   // Ganti dengan Password akun InfinityFree lu
+    define('DB_NAME',    'if0_XXXXXXXX_db');        // Ganti dengan Nama Database yang lu buat
+    define('DB_PORT',    '3306');
+    define('APP_URL',    'https://' . $_SERVER['HTTP_HOST']);
 } else {
+    // 3. Lokal XAMPP
     define('DB_HOST', 'localhost');
     define('DB_USER', 'root');
     define('DB_PASS', '');
