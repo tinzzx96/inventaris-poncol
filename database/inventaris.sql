@@ -10,11 +10,11 @@ SET time_zone = "+07:00";
 -- ------------------------------------------------------------
 -- Create & Use Database
 -- ------------------------------------------------------------
-CREATE DATABASE IF NOT EXISTS `inventaris_sekolah`
-  CHARACTER SET utf8mb4
-  COLLATE utf8mb4_unicode_ci;
+-- CREATE DATABASE IF NOT EXISTS `inventaris_sekolah`
+ -- CHARACTER SET utf8mb4
+ -- COLLATE utf8mb4_unicode_ci;
 
-USE `inventaris_sekolah`;
+-- USE `inventaris_sekolah`;
 
 -- ============================================================
 -- TABLE: users
