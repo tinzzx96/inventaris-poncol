@@ -110,7 +110,7 @@ require_once __DIR__ . '/../../includes/header.php';
               <label class="form-label">Lebar Ruangan (Grid Kolom)</label>
               <div style="display:flex; gap:6px; align-items:center;">
                 <button type="button" class="btn" onclick="adjustGridSize('cols', -1)" style="padding: 8px; font-weight:bold;">−</button>
-                <input type="number" id="grid_cols" class="form-control" value="<?= $lab['grid_cols'] ?>" min="6" max="24" readonly style="text-align:center; font-weight:600;">
+                <input type="number" id="grid_cols" class="form-control" value="<?= (int)($lab['grid_cols'] ?? 8) ?>" min="6" max="24" readonly style="text-align:center; font-weight:600;">
                 <button type="button" class="btn" onclick="adjustGridSize('cols', 1)" style="padding: 8px; font-weight:bold;">+</button>
               </div>
             </div>
@@ -118,7 +118,7 @@ require_once __DIR__ . '/../../includes/header.php';
               <label class="form-label">Panjang Ruangan (Grid Baris)</label>
               <div style="display:flex; gap:6px; align-items:center;">
                 <button type="button" class="btn" onclick="adjustGridSize('rows', -1)" style="padding: 8px; font-weight:bold;">−</button>
-                <input type="number" id="grid_rows" class="form-control" value="<?= $lab['grid_rows'] ?>" min="6" max="24" readonly style="text-align:center; font-weight:600;">
+                <input type="number" id="grid_rows" class="form-control" value="<?= (int)($lab['grid_rows'] ?? 6) ?>" min="6" max="24" readonly style="text-align:center; font-weight:600;">
                 <button type="button" class="btn" onclick="adjustGridSize('rows', 1)" style="padding: 8px; font-weight:bold;">+</button>
               </div>
             </div>
@@ -131,7 +131,7 @@ require_once __DIR__ . '/../../includes/header.php';
     <div style="display:flex; flex-direction:column; align-items:center; gap:20px; width:100%;">
       <div class="editor-canvas-panel" style="width:100%;">
         <div class="editor-room-wall" style="width: 100%; max-width: 600px;">
-          <div class="editor-grid" id="editor_grid" style="--grid-cols: <?= $lab['grid_cols'] ?>; --grid-rows: <?= $lab['grid_rows'] ?>;">
+          <div class="editor-grid" id="editor_grid" style="--grid-cols: <?= (int)($lab['grid_cols'] ?? 8) ?>; --grid-rows: <?= (int)($lab['grid_rows'] ?? 6) ?>;">
             <!-- Dynamic JS Cells -->
           </div>
         </div>
@@ -163,7 +163,7 @@ require_once __DIR__ . '/../../includes/header.php';
           <span>Drop Hapus</span>
         </div>
       </div>
-    </div></div>
+    </div>
 
     <!-- Panel Kanan: Toolbox & Inspector Terpisah -->
     <div style="display:flex; flex-direction:column; gap:20px;">
@@ -358,8 +358,8 @@ function showToast(msg, type = 'success') {
 }
 
 // Config state
-let gridCols = <?= $lab['grid_cols'] ?>;
-let gridRows = <?= $lab['grid_rows'] ?>;
+let gridCols = <?= (int)($lab['grid_cols'] ?? 8) ?>;
+let gridRows = <?= (int)($lab['grid_rows'] ?? 6) ?>;
 let pintuPosisi = '<?= htmlspecialchars($lab['pintu_posisi'] ?? 'kiri-bawah') ?>';
 let selectedAssetId = null;
 let dragSource = null;
