@@ -1,4 +1,5 @@
 <?php
+// Aplikasi Inventaris Sekolah - SMKS Poncol Jakarta
 require_once __DIR__ . '/config/db.php';
 require_once __DIR__ . '/includes/auth.php';
 
