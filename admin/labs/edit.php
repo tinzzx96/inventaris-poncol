@@ -1039,6 +1039,8 @@ window.onload = () => {
     window.addEventListener("drop", function(e) {
         e.preventDefault();
     }, false);
+};
+
 // 3D Preview Modal Controller and Engine
 let modalThreeScene = null;
 let modalThreeRenderer = null;
